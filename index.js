@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 function mergeFilesWebpack(options){
     if(typeof options !== 'object' && !options.filename) {
         throw new Error('Filename is mandatory');
@@ -58,7 +60,7 @@ mergeFilesWebpack.prototype.apply = function mergeFilesWebpackApply(compiler) {
             return;
         }
         // we will merge all the filtered files into the first one
-        var firstFile = assets[filteredFiles[0]];
+        var firstFile = _.cloneDeep(assets[filteredFiles[0]]);
         for(var i = 1; i < filteredFiles.length; i++) {
             var thisFile = assets[filteredFiles[i]];
             // the files extracted by extract-text-webpack-plugin
